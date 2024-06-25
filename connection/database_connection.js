@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
-const connectionUrl = "mongodb://localhost:27017/todo_db";
 const databaseConnection = async () => {
     try{
-        await mongoose.connect(connectionUrl);
+        await mongoose.connect(process.env.CONNECTION_URL);
         console.log("Database connection successful ... !")
     }catch (e) {
         console.log(e.message);
