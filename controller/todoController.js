@@ -1,7 +1,7 @@
 import todo from "../models/Todo.js";
 import moment from "moment";
 
-const homePageController = async (req, res, next) => {
+const homePageController = async (req, res) => {
     try {
         const allTodos = await todo.find({}).sort({createdAt: -1});
         res.locals.moment = moment;
@@ -12,7 +12,7 @@ const homePageController = async (req, res, next) => {
     }
 }
 
-const addTodoPageController = (req, res, next) => {
+const addTodoPageController = (req, res) => {
     try {
         res.render("newTodo", {title: "Add Todo"});
 
@@ -21,7 +21,7 @@ const addTodoPageController = (req, res, next) => {
     }
 }
 
-const updateTodoPageController = async (req, res, next) => {
+const updateTodoPageController = async (req, res) => {
     try {
         const {id} = req.query;
         const filterTodo = await todo.findById(id);
@@ -32,7 +32,7 @@ const updateTodoPageController = async (req, res, next) => {
     }
 }
 
-const deleteTodoPageController = (req, res, next) => {
+const deleteTodoPageController = (req, res) => {
     try {
         const {id} = req.query;
         res.render("deleteTodo",{title : "Delete Todo", id : id});
@@ -42,7 +42,7 @@ const deleteTodoPageController = (req, res, next) => {
     }
 }
 
-const addTodoController = async  (req, res, next) => {
+const addTodoController = async  (req, res) => {
     try{
         const {title,desc} = req.body;
 
@@ -60,7 +60,7 @@ const addTodoController = async  (req, res, next) => {
     }
 }
 
-const updateTodoController = async  (req, res, next) => {
+const updateTodoController = async  (req, res) => {
     try{
         const {id} = req.params;
         const {title,desc} = req.body;
@@ -81,7 +81,7 @@ const updateTodoController = async  (req, res, next) => {
     }
 }
 
-const deleteTodoController = async  (req, res, next) => {
+const deleteTodoController = async  (req, res) => {
     try{
         const {id, confirm} = req.query;
 

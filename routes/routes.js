@@ -1,9 +1,7 @@
-import todo from "../models/Todo.js";
 import express from "express";
 import controllers from "../controller/todoController.js";
 
 const app = express();
-
 
 app.get("/", controllers.homePageController);
 
