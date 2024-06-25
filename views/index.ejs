@@ -22,8 +22,8 @@
                 <td> <%= moment(todos[i].createdAt).format("MMM DD, YYYY, HH:mm:ss")%> </td>
                 <td> <%= moment(todos[i].updatedAt).format("MMM DD, YYYY, HH:mm:ss")%> </td>
                 <td>
-                    <a href="/updateTodo" class="btn btn-danger"> Edit </a>
-                    <a href="/deleteTodo" class="btn"> Delete </a>
+                    <a href="/updateTodo?id=<%= todos[i]._id %>" class="btn btn-danger"> Edit </a>
+                    <a href="/deleteTodo?id=<%= todos[i]._id %>" class="btn"> Delete </a>
                 </td>
             <% } %>
         </tr>

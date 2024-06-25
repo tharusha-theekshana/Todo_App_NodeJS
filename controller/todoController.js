@@ -1,7 +1,7 @@
 import todo from "../models/Todo.js";
 import moment from "moment";
 
-const homeController = async (req, res, next) => {
+const homePageController = async (req, res, next) => {
     try {
         const allTodos = await todo.find({}).sort({createdAt: -1});
         res.locals.moment = moment;
@@ -12,25 +12,31 @@ const homeController = async (req, res, next) => {
     }
 }
 
-const addTodoControllerRoute = (req, res, next) => {
+const addTodoPageController = (req, res, next) => {
     try {
         res.render("newTodo", {title: "Add Todo"});
+
     } catch (e) {
         res.status(500).json({message: e.message});
     }
 }
 
-const updateTodoController = (req, res, next) => {
+const updateTodoPageController = async (req, res, next) => {
     try {
-        res.render("updateTodo",{title : "Update Todo"});
+        const {id} = req.query;
+        const filterTodo = await todo.findById(id);
+        res.render("updateTodo",{title : "Update Todo", todo : filterTodo});
+
     } catch (e) {
         res.status(500).json({message: e.message});
     }
 }
 
-const deleteTodoController = (req, res, next) => {
+const deleteTodoPageController = (req, res, next) => {
     try {
-        res.render("deleteTodo",{title : "Delete Todo"});
+        const {id} = req.query;
+        res.render("deleteTodo",{title : "Delete Todo", id : id});
+
     } catch (e) {
         res.status(500).json({message: e.message});
     }
@@ -53,4 +59,41 @@ const addTodoController = async  (req, res, next) => {
         res.status(500).json({ message : e.message});
     }
 }
-export default {homeController, addTodoControllerRoute , updateTodoController, deleteTodoController , addTodoController};
+
+const updateTodoController = async  (req, res, next) => {
+    try{
+        const {id} = req.params;
+        const {title,desc} = req.body;
+
+        const updatedTodo = await todo.findById(id);
+        if(!updatedTodo){
+            res.status(404).json({ message : "Todo not found ... !"});
+        }
+
+        updatedTodo.title = title;
+        updatedTodo.desc = desc;
+
+        await updatedTodo.save();
+        res.redirect("/");
+
+    }catch (e) {
+        res.status(500).json({ message : e.message});
+    }
+}
+
+const deleteTodoController = async  (req, res, next) => {
+    try{
+        const {id, confirm} = req.query;
+
+        if(confirm === "yes"){
+            await todo.findByIdAndDelete(id);
+        }
+
+        res.redirect("/");
+
+    }catch (e) {
+        res.status(500).json({message : e.message});
+    }
+}
+
+export default {homePageController, addTodoPageController , updateTodoPageController, deleteTodoPageController , addTodoController, updateTodoController, deleteTodoController};
