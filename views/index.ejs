@@ -1,12 +1,5 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Todo App </title>
-    <link rel="stylesheet" href="css/bootstrap.css" />
-</head>
+<%- include("partials/header") %>
 <body>
 <div class="">
     <p class="fw-bold"> Todo List </p>
@@ -23,14 +16,16 @@
             <th>Title</th>
         </tr>
         <tr>
-            <td> Test </td>
-            <td> Test </td>
-            <td> Test </td>
-            <td> Test </td>
-            <td>
-                <a href="/updateTodo" class="btn btn-danger"> Edit </a>
-                <a href="/deleteTodo" class="btn"> Delete </a>
-            </td>
+            <% for(let i=0; i < todos.length; i++ ){ %>
+                <td> <%= todos[i].title %> </td>
+                <td> <%= todos[i].desc %> </td>
+                <td> <%= todos[i].createdAt%> </td>
+                <td> <%= todos[i].updatedAt %> </td>
+                <td>
+                    <a href="/updateTodo" class="btn btn-danger"> Edit </a>
+                    <a href="/deleteTodo" class="btn"> Delete </a>
+                </td>
+            <% } %>
         </tr>
     </table>
 </div>

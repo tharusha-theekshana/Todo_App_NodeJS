@@ -1,12 +1,5 @@
-<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Todo App - Add Todo</title>
-</head>
+<%- include("partials/header")%>
 <body>
     <div class="table-container">
         <h2 class="todo-title"> Add todo </h2>
@@ -14,7 +7,7 @@
         <div>
             <a href="/"> Back </a>
 
-            <form action="" method="">
+            <form action="/addTodo" method="post">
                 <div>
                     <div>
                         <div class="from-group">
@@ -23,8 +16,8 @@
                         </div>
 
                         <div class="from-group">
-                            <label for="title"> Description </label>
-                            <input type="text" name="description" id="" placeholder="type description here" />
+                            <label for="desc"> Description </label>
+                            <input type="text" name="desc" id="" placeholder="type description here" />
                         </div>
 
                         <div class="from-group">
