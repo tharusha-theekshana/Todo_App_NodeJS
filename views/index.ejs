@@ -19,8 +19,8 @@
             <% for(let i=0; i < todos.length; i++ ){ %>
                 <td> <%= todos[i].title %> </td>
                 <td> <%= todos[i].desc %> </td>
-                <td> <%= todos[i].createdAt%> </td>
-                <td> <%= todos[i].updatedAt %> </td>
+                <td> <%= moment(todos[i].createdAt).format("MMM DD, YYYY, HH:mm:ss")%> </td>
+                <td> <%= moment(todos[i].updatedAt).format("MMM DD, YYYY, HH:mm:ss")%> </td>
                 <td>
                     <a href="/updateTodo" class="btn btn-danger"> Edit </a>
                     <a href="/deleteTodo" class="btn"> Delete </a>
