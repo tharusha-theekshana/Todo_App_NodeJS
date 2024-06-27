@@ -1,32 +1,43 @@
 <html lang="en">
 <%- include("partials/header") %>
 <body>
-<div class="">
-    <p class="fw-bold"> Todo List </p>
-    <div>
-        <a class="btn" href="/addTodo"> Add todo </a>
+<div class="col-12">
+    <nav class="navbar navbar-light bg-danger justify-content-between px-4">
+        <a class="navbar-brand text-white fs-3 fw-bold">Todo App </a>
+        <a class="btn btn-dark btn-sm align-self-end mb-2" data-bs-toggle="offcanvas" aria-controls="offcanvasScrolling" data-bs-target="#offcanvasScrolling"> Add todo <i
+                    class="bi bi-plus-lg text-white fw-bold"></i> </a>
+    </nav>
+
+    <div class="col-12 text-center mt-4">
+        <p class="fw-bold fs-3"> Todo List </p>
     </div>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header col-12 d-flex justify-content-between align-items-center">
+            <div></div>
+            <i class="bi bi-x-lg fw-bold closeIcon" data-bs-dismiss="offcanvas" aria-label="Close"></i>
+        </div>
+        <div class="offcanvas-body">
+            <%- include("newTodo.ejs") %>
+        </div>
+    </div>
+
     <br>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Title</th>
-            <th>Title</th>
-            <th>Title</th>
-            <th>Title</th>
-        </tr>
-        <tr>
-            <% for(let i=0; i < todos.length; i++ ){ %>
-                <td> <%= todos[i].title %> </td>
-                <td> <%= todos[i].desc %> </td>
-                <td> <%= moment(todos[i].createdAt).format("MMM DD, YYYY, HH:mm:ss")%> </td>
-                <td> <%= moment(todos[i].updatedAt).format("MMM DD, YYYY, HH:mm:ss")%> </td>
-                <td>
+    <div class="col-12">
+        <% for(let i = 0; i < todos.length; i++ ){ %>
+            <div class="offset-1 col-10">
+                <p><%= todos[i].title %> </p>
+                <p> <%= todos[i].desc %> </p>
+                <p> <%= moment(todos[i].createdAt).format("MMM DD, YYYY, HH:mm:ss") %>  </p>
+                <p><%= moment(todos[i].updatedAt).format("MMM DD, YYYY, HH:mm:ss") %>  </p>
+                <div>
                     <a href="/updateTodo?id=<%= todos[i]._id %>" class="btn btn-danger"> Edit </a>
                     <a href="/deleteTodo?id=<%= todos[i]._id %>" class="btn"> Delete </a>
-                </td>
-            <% } %>
-        </tr>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
     </table>
 </div>
 </body>
